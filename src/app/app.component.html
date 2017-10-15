@@ -1,7 +1,13 @@
-<mat-toolbar color='primary' class='mat-elevation-z6'>
-  <span>Task Manager</span>
+<div class="content-main">
+  <mat-toolbar color="primary">
+    <span>Gerenciador de Tarefas</span>
 
-  <span class="fill-remaining-space"></span>
+    <span class="fill-remaining-space"></span>
 
-  <button mat-button>Adicionar</button>
-</mat-toolbar>
+    <button mat-button>Listar Tarefas</button>
+    <button mat-button>Adicionar Tarefa</button>
+  </mat-toolbar>
+
+  <app-adicionar-tarefas></app-adicionar-tarefas>
+  <app-lista-tarefas></app-lista-tarefas>
+</div>

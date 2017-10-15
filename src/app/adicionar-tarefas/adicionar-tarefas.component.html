@@ -1,0 +1,32 @@
+<mat-card>
+    <h2 class="center">Adicionar Tarefa</h2>
+    <form class="form center" #frm="ngForm" (ngSubmit)="cadastrar(frm)">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Descrição" name="descricao" ngModel>
+      </mat-form-field>
+      
+      <table class="full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Deadline" name="deadline" ngModel>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </td>
+          <td class="full-width"></td>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="Severidade" name="severidade" ngModel>
+                <mat-option value=0>Baixa</mat-option>
+                <mat-option value=1>Média</mat-option>
+                <mat-option value=2>Alta</mat-option>
+                <mat-option value=3>Urgente</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <button mat-button type="submit" label="Cadastrar">Cadastrar</button>      
+    </form>
+  </mat-card>
