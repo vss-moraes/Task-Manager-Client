@@ -12,7 +12,12 @@ import { TarefaService } from '../tarefa/tarefa.service';
 export class AdicionarTarefasComponent implements OnInit {
 
   tarefas = [];
-
+  valor_severidade = [
+    {valor: 0, conteudo: 'Baixa'},
+    {valor: 1, conteudo: 'Média'},
+    {valor: 2, conteudo: 'Alta'},
+    {valor: 3, conteudo: 'Urgente'},    
+  ];
 
   constructor(private tarefaService: TarefaService) { }
 

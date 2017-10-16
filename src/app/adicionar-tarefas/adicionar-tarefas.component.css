@@ -17,13 +17,28 @@
     padding: 10px;
 }
 
+.baixa {
+    background-color: green;
+}
+
+.media {
+    background-color: blue;
+}
+
+.alta {
+    background-color: orange;
+}
+
+.urgente {
+    background-color: red;
+}
+
 .card-adicionar {
     top: 64px;
     bottom: 74px;
 }
 
 .card-tarefa {
-    background-color: rgb(194, 125, 125);
     top: 74px;
     margin-bottom: 10px;
 }

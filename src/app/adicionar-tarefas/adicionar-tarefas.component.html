@@ -14,10 +14,10 @@
 
       <mat-form-field>
         <mat-select placeholder="Severidade" name="severidade" ngModel [required]="true">
-          <mat-option value=0>Baixa</mat-option>
-          <mat-option value=1>Média</mat-option>
-          <mat-option value=2>Alta</mat-option>
-          <mat-option value=3>Urgente</mat-option>
+          <mat-option *ngFor="let severidade of valor_severidade" 
+                      [value]="severidade.valor">
+            {{ severidade.conteudo }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <div>
@@ -31,9 +31,9 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="card-tarefa" *ngFor="let tarefa of tarefas">
-    <mat-card-title>{{ tarefa.descricao }}</mat-card-title>
-    <mat-card-content>
-      <p>{{ tarefa.deadline }}</p>
-    </mat-card-content>
-  </mat-card>
+<mat-card class="card-tarefa" [ngClass]="tarefa.severidade" *ngFor="let tarefa of tarefas">
+  <mat-card-title>{{ tarefa.descricao }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ tarefa.deadline }}</p>
+  </mat-card-content>
+</mat-card>
