@@ -9,15 +9,13 @@ import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { AdicionarTarefasComponent } from './adicionar-tarefas/adicionar-tarefas.component';
-import { ListaTarefasComponent } from './lista-tarefas/lista-tarefas.component';
 
 import { TarefaService } from './tarefa/tarefa.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdicionarTarefasComponent,
-    ListaTarefasComponent
+    AdicionarTarefasComponent
   ],
   imports: [
     BrowserModule,

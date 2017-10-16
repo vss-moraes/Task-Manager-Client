@@ -17,7 +17,13 @@
     padding: 10px;
 }
 
-mat-card {
+.card-adicionar {
     top: 64px;
     bottom: 74px;
+}
+
+.card-tarefa {
+    background-color: rgb(194, 125, 125);
+    top: 74px;
+    margin-bottom: 10px;
 }

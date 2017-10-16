@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="card-adicionar">
   <mat-card-title>Adicionar Tarefa</mat-card-title>
   <mat-card-content>
     <form class="form full-width" #frm="ngForm" (ngSubmit)="cadastrar(frm)">
@@ -30,3 +30,10 @@
     </form>
   </mat-card-content>
 </mat-card>
+
+<mat-card class="card-tarefa" *ngFor="let tarefa of tarefas">
+    <mat-card-title>{{ tarefa.descricao }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ tarefa.deadline }}</p>
+    </mat-card-content>
+  </mat-card>
