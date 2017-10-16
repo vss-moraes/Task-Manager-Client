@@ -1,11 +1,6 @@
-<mat-card>
-  <ul>
-    <li *ngFor="let tarefa of tarefas">
-      <p>{{ tarefa.id }}</p>
-      <p>{{ tarefa.descricao }}</p>
-      <p>{{ tarefa.deadline }}</p>
-      <p>{{ tarefa.severidade }}</p>
-      <p>{{ tarefa.realizada }}</p>
-    </li>  
-  </ul>
+<mat-card *ngFor="let tarefa of tarefas">
+  <mat-card-title>{{ tarefa.descricao }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ tarefa.deadline }}</p>
+  </mat-card-content>
 </mat-card>

@@ -12,6 +12,7 @@ export class TarefaService {
     }
 
     cadastrar(tarefa: any) {
+        console.log(tarefa);
         return this.http.post(this.urlServicos, tarefa);
     }
 
