@@ -18,19 +18,19 @@
 }
 
 .baixa {
-    background-color: green;
+    background-color: lightgreen;
 }
 
 .media {
-    background-color: blue;
+    background-color: lightblue;
 }
 
 .alta {
-    background-color: orange;
+    background-color: lightsalmon;
 }
 
 .urgente {
-    background-color: red;
+    background-color: lightcoral;
 }
 
 .card-adicionar {
@@ -42,3 +42,11 @@
     top: 74px;
     margin-bottom: 10px;
 }
+
+mat-card-title {
+    display: flex;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }

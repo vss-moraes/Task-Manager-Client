@@ -1,5 +1,7 @@
 <mat-card class="card-adicionar">
-  <mat-card-title>Adicionar Tarefa</mat-card-title>
+  <mat-card-title>
+    Adicionar Tarefa
+  </mat-card-title>
   <mat-card-content>
     <form class="form full-width" #frm="ngForm" (ngSubmit)="cadastrar(frm)">
       <mat-form-field class="half-width">
@@ -32,8 +34,11 @@
 </mat-card>
 
 <mat-card class="card-tarefa" [ngClass]="tarefa.severidade" *ngFor="let tarefa of tarefas">
-  <mat-card-title>{{ tarefa.descricao }}</mat-card-title>
-  <mat-card-content>
-    <p>{{ tarefa.deadline }}</p>
-  </mat-card-content>
+  <mat-card-title>
+    <span>{{ tarefa.descricao }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button color="warn">
+        <mat-icon aria-label="Remover" (click)="remover(frm, tarefa.id)">delete</mat-icon>
+      </button>
+  </mat-card-title>
 </mat-card>

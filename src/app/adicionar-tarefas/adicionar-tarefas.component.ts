@@ -38,8 +38,9 @@ export class AdicionarTarefasComponent implements OnInit {
     })
   }
 
-  remover(formulario, tarefa) {
-    this.tarefaService.remover(tarefa._id).subscribe(() => {
+  remover(formulario, id) {
+    console.log(id);
+    this.tarefaService.remover(id).subscribe(() => {
       formulario.reset();
       this.consultar();
     });
