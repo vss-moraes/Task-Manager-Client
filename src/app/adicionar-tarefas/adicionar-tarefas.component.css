@@ -40,16 +40,22 @@
 .card-tarefa {
     top: 14px;
     margin-bottom: 10px;
+    z-index: 1;
 }
 
 mat-card-title {
     display: flex;
+    font-size: 14pt;
 }
 
 mat-card-content {
     display: flex;
 }
 
+mat-chip {
+    background-color: blue;
+}
+
 .spacer {
     flex: 1 1 auto;
-  }
+}

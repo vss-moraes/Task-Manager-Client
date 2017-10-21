@@ -46,8 +46,11 @@
       </button>
   </mat-card-title>
   <mat-card-content>
-    <span>Severidade: {{ tarefa.severidade }}</span>
-    <span>Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy'}}</span>
+    <mat-chip-list>
+        <mat-chip>Severidade: {{ tarefa.severidade }}</mat-chip>
+        <mat-chip>Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy'}}</mat-chip>
+    </mat-chip-list>
+    
     <span class="spacer"></span>
     <mat-slide-toggle color="primary">
       Realizada
