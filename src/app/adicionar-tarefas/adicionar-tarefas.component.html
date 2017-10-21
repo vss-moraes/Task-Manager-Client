@@ -41,4 +41,12 @@
         <mat-icon aria-label="Remover" (click)="remover(frm, tarefa.id)">delete</mat-icon>
       </button>
   </mat-card-title>
+  <mat-card-content>
+    <span>Severidade: {{ tarefa.severidade }}</span>
+    <span>Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy'}}</span>
+    <span class="spacer"></span>
+    <mat-slide-toggle color="primary">
+      Realizada
+    </mat-slide-toggle>
+  </mat-card-content>
 </mat-card>

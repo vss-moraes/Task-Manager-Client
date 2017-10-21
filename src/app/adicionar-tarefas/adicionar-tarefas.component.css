@@ -47,6 +47,10 @@ mat-card-title {
     display: flex;
 }
 
+mat-card-content {
+    display: flex;
+}
+
 .spacer {
     flex: 1 1 auto;
   }
