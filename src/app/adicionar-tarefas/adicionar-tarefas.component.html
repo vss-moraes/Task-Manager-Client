@@ -1,37 +1,41 @@
-<mat-card class="card-adicionar">
-  <mat-card-title>
-    Adicionar Tarefa
-  </mat-card-title>
-  <mat-card-content>
-    <form class="form full-width" #frm="ngForm" (ngSubmit)="cadastrar(frm)">
-      <mat-form-field class="half-width">
-        <input matInput placeholder="Descrição" name="descricao" ngModel [required]="true">
-      </mat-form-field>
+<mat-expansion-panel class="card-adicionar">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Adicionar Tarefa
+    </mat-panel-title>
+    <mat-panel-description>
+      Adicione uma nova tarefa
+    </mat-panel-description>
+  </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Deadline" name="deadline" ngModel [required]="true">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+  <form class="form full-width" #frm="ngForm" (ngSubmit)="cadastrar(frm)">
+    <mat-form-field class="half-width">
+      <input matInput placeholder="Descrição" name="descricao" ngModel [required]="true">
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Severidade" name="severidade" ngModel [required]="true">
-          <mat-option *ngFor="let severidade of valor_severidade" 
-                      [value]="severidade.valor">
-            {{ severidade.conteudo }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-raised-button color="primary" 
-                type="submit" label="Cadastrar" 
-                [disabled]="frm.invalid" >
-          Cadastrar
-        </button>                
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Deadline" name="deadline" ngModel [required]="true">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Severidade" name="severidade" ngModel [required]="true">
+        <mat-option *ngFor="let severidade of valor_severidade" 
+                    [value]="severidade.valor">
+          {{ severidade.conteudo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="primary" 
+              type="submit" label="Cadastrar" 
+              [disabled]="frm.invalid" >
+        Cadastrar
+      </button>                
+    </div>
+  </form>
+</mat-expansion-panel>
 
 <mat-card class="card-tarefa" [ngClass]="tarefa.severidade" *ngFor="let tarefa of tarefas">
   <mat-card-title>

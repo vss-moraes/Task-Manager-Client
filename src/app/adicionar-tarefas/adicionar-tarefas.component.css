@@ -34,12 +34,11 @@
 }
 
 .card-adicionar {
-    top: 64px;
-    bottom: 74px;
+    margin-top: 84px;
 }
 
 .card-tarefa {
-    top: 74px;
+    top: 14px;
     margin-bottom: 10px;
 }
 
