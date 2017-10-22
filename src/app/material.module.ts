@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { DialogsService } from './custom-dialog/custom-dialog.service';
+import { CustomDialog } from './custom-dialog/custom-dialog.component';
 
 import {
   MatButtonModule,
@@ -12,7 +14,8 @@ import {
   MatSelectModule,
   MatSlideToggleModule,
   MatExpansionModule,
-  MatChipsModule
+  MatChipsModule,
+  MatDialogModule
 } from '@angular/material';
 
 @NgModule({
@@ -28,7 +31,8 @@ import {
     MatSelectModule,
     MatSlideToggleModule,
     MatExpansionModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -42,7 +46,18 @@ import {
     MatSelectModule,
     MatSlideToggleModule,
     MatExpansionModule,
-    MatChipsModule
-  ]
+    MatChipsModule,
+    MatDialogModule,
+    CustomDialog
+  ],
+  declarations: [
+    CustomDialog
+  ],
+  providers: [
+    DialogsService
+  ],
+  entryComponents: [
+    CustomDialog,
+  ],
 })
 export class MaterialModule {}

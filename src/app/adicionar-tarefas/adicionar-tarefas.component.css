@@ -34,7 +34,7 @@
 }
 
 .card-adicionar {
-    margin-top: 84px;
+    margin-top: 64px;
 }
 
 .card-tarefa {
@@ -50,10 +50,6 @@ mat-card-title {
 
 mat-card-content {
     display: flex;
-}
-
-.spacer {
-    flex: 1 1 auto;
 }
 
 .atrasada {

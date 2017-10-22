@@ -19,4 +19,8 @@ export class TarefaService {
     remover(id: any) {
         return this.http.delete(this.urlServicos + '/' + id);
     }
+
+    atualizar(id: any, tarefa: any) {
+        return this.http.put(this.urlServicos + '/' + id, tarefa);
+    }
 }
