@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 
 import { TarefaService } from '../tarefa/tarefa.service';
 import { DialogsService } from '../custom-dialog/custom-dialog.service';
+import { PushNotificationsService } from 'angular2-notifications';
+
 
 @Component({
   selector: 'app-adicionar-tarefas',
@@ -21,15 +23,38 @@ export class AdicionarTarefasComponent implements OnInit {
     {valor: 3, conteudo: 'Urgente'},    
   ];
 
-  constructor(private tarefaService: TarefaService, private dialogsService: DialogsService) { }
+  constructor(private tarefaService: TarefaService,
+              private dialogsService: DialogsService,
+              private _push: PushNotificationsService) { }
 
   ngOnInit() {
     this.consultar();
+    this._push.requestPermission();
+  }
+
+  criarPushNotification(title, body){
+    this._push.create(title, {body: body}).subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    );
+  }
+
+  verificarDatas(){
+    let today = new Date()
+    let str = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()    
+    this.tarefas.forEach(tarefa => {
+      if (tarefa.deadline == str){
+        this.criarPushNotification(tarefa.descricao, "Termina hoje!");
+      } else {
+        console.log(tarefa.deadline);
+      }
+    });
   }
 
   consultar() {
     this.tarefaService.listar().subscribe((dados) => {
       this.tarefas = dados;
+      this.verificarDatas();
     });
   }
 
@@ -53,7 +78,7 @@ export class AdicionarTarefasComponent implements OnInit {
     })
   }
 
-  public deleteDialog(title, message, _id) {
+  deleteDialog(title, message, _id) {
     this.dialogsService
       .confirm(title, message)
       .subscribe(result => {
@@ -68,7 +93,7 @@ export class AdicionarTarefasComponent implements OnInit {
     .confirm(title, message)
     .subscribe(result => {
       if (result){
-        tarefa.realizada = true;
+        tarefa.realizada = 1;
         this.atualizar(tarefa.id, tarefa);
       }
     });
