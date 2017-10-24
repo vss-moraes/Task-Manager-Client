@@ -18,19 +18,19 @@
 }
 
 .baixa {
-    background-color: lightgreen;
+    background-color: rgb(255, 255, 110);
 }
 
 .media {
-    background-color: lightblue;
+    background-color: rgb(252, 179, 53);
 }
 
 .alta {
-    background-color: lightsalmon;
+    background-color: rgb(252, 91, 32);
 }
 
 .urgente {
-    background-color: lightcoral;
+    background-color: rgb(248, 25, 25);
 }
 
 .card-adicionar {
