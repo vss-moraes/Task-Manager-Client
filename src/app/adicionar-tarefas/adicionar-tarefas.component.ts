@@ -21,7 +21,7 @@ export class AdicionarTarefasComponent implements OnInit {
     {valor: 1, conteudo: 'Média'},
     {valor: 2, conteudo: 'Alta'},
     {valor: 3, conteudo: 'Urgente'},    
-  ];
+  ]; 
 
   constructor(private tarefaService: TarefaService,
               private dialogsService: DialogsService,
@@ -39,14 +39,41 @@ export class AdicionarTarefasComponent implements OnInit {
     );
   }
 
-  verificarDatas(){
-    let today = new Date()
-    let str = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()    
-    this.tarefas.forEach(tarefa => {
-      if (tarefa.deadline == str){
-        this.criarPushNotification(tarefa.descricao, "Termina hoje!");
+  comparaDatas(data){
+    data = data.split("-"); //ano-mes-dia
+    console.log(data);
+    let hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    console.log(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+    if (hoje.getFullYear() == data[0]){
+      if (hoje.getMonth() + 1 == data[1]){
+        if (hoje.getDate() == data[2]){
+          return 0; // É hoje
+        } else if (hoje.getDate() < data[2]){
+          return 1; // No prazo
+        } else {
+          return -1; // Atrasado
+        }
+      } else if (hoje.getMonth() + 1  < data[1]){
+        return 1;
       } else {
-        console.log(tarefa.deadline);
+        return -1;
+      }
+    } else if (hoje.getFullYear() < data[0]){
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
+  verificarDatas(){  
+    this.tarefas.forEach(tarefa => {
+      if (this.comparaDatas(tarefa.deadline) == 0){
+        this.criarPushNotification(tarefa.descricao, "Termina hoje!");
+      } else if (this.comparaDatas(tarefa.deadline) == -1){
+        this.criarPushNotification(tarefa.descricao, "ATRASADA!");
+      } else {
+        console.log(tarefa.descricao + "DATA: " + new Date(tarefa.deadline));
       }
     });
   }

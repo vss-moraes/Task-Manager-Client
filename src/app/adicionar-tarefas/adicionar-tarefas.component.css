@@ -33,6 +33,11 @@
     background-color: rgb(248, 25, 25);
 }
 
+.preto {
+    background-color: black;
+    color: white;
+}
+
 .card-adicionar {
     margin-top: 64px;
 }
