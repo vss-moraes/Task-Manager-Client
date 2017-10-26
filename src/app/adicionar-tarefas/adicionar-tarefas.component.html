@@ -10,17 +10,17 @@
 
   <form class="form full-width" #frm="ngForm" (ngSubmit)="cadastrar(frm)">
     <mat-form-field class="half-width">
-      <input matInput placeholder="Descrição" name="descricao" ngModel [required]="true">
+      <input id="descricao" matInput placeholder="Descrição" name="descricao" ngModel required>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Deadline" name="deadline" ngModel [required]="true">
+      <input id="deadline" matInput [matDatepicker]="picker" placeholder="Deadline" name="deadline" ngModel required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="Severidade" name="severidade" ngModel [required]="true">
+      <mat-select id="severidade" placeholder="Severidade" name="severidade" ngModel required>
         <mat-option *ngFor="let severidade of valor_severidade" 
                     [value]="severidade.valor">
           {{ severidade.conteudo }}
@@ -50,11 +50,11 @@
     <mat-chip-list>
         <mat-chip color="primary" selected="true">Severidade: {{ tarefa.severidade }}</mat-chip>
         
-        <mat-chip *ngIf="comparaDatas(tarefa.deadline) == -1; else elseBlock"
-                  class="preto">Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy' }}</mat-chip>
-        <ng-template #elseBlock>
-          <mat-chip color="primary" selected="true">Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy' }}</mat-chip>                    
-        </ng-template>
+        <ng-container [ngSwitch]="comparaDatas(tarefa.deadline)">
+          <mat-chip *ngSwitchCase="'atraso'" class="preto">Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy' }}</mat-chip>              
+          <mat-chip *ngSwitchCase="'hoje'" color="warn" selected="true">Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy' }}</mat-chip>                                            
+          <mat-chip *ngSwitchCase="'ok'" color="primary" selected="true">Prazo: {{ tarefa.deadline | date: 'dd/MM/yyyy' }}</mat-chip>                              
+        </ng-container>
 
       </mat-chip-list>
     

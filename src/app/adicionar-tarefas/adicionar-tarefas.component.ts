@@ -16,6 +16,7 @@ export class AdicionarTarefasComponent implements OnInit {
 
   public result: any;
   tarefas = [];
+  reload = true;
   valor_severidade = [
     {valor: 0, conteudo: 'Baixa'},
     {valor: 1, conteudo: 'Média'},
@@ -41,54 +42,54 @@ export class AdicionarTarefasComponent implements OnInit {
 
   comparaDatas(data){
     data = data.split("-"); //ano-mes-dia
-    console.log(data);
     let hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
-    console.log(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
     if (hoje.getFullYear() == data[0]){
       if (hoje.getMonth() + 1 == data[1]){
         if (hoje.getDate() == data[2]){
-          return 0; // É hoje
+          return "hoje"; // É hoje
         } else if (hoje.getDate() < data[2]){
-          return 1; // No prazo
+          return "ok"; // No prazo
         } else {
-          return -1; // Atrasado
+          return "atraso"; // Atrasado
         }
       } else if (hoje.getMonth() + 1  < data[1]){
-        return 1;
+        return "ok";
       } else {
-        return -1;
+        return "atraso";
       }
     } else if (hoje.getFullYear() < data[0]){
-      return 1;
+      return "ok";
     } else {
-      return -1;
+      return "atraso";
     }
   }
 
   verificarDatas(){  
     this.tarefas.forEach(tarefa => {
-      if (this.comparaDatas(tarefa.deadline) == 0){
+      if (this.comparaDatas(tarefa.deadline) == "hoje"){
         this.criarPushNotification(tarefa.descricao, "Termina hoje!");
-      } else if (this.comparaDatas(tarefa.deadline) == -1){
+      } else if (this.comparaDatas(tarefa.deadline) == "atraso"){
         this.criarPushNotification(tarefa.descricao, "ATRASADA!");
       } else {
         console.log(tarefa.descricao + "DATA: " + new Date(tarefa.deadline));
       }
+      this.reload = false;
     });
   }
 
   consultar() {
     this.tarefaService.listar().subscribe((dados) => {
       this.tarefas = dados;
-      this.verificarDatas();
+      if (this.reload)
+        this.verificarDatas();
     });
   }
 
   cadastrar(formulario: FormControl) {
     this.tarefaService.cadastrar(formulario.value).subscribe(() => {
-      formulario.reset();
       this.consultar();
+      formulario.reset();
     })
   }
 
