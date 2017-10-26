@@ -37,6 +37,12 @@
   </form>
 </mat-expansion-panel>
 
+<mat-card class="card-tarefa" *ngIf="tarefas.length == 0">
+  <mat-card-content>
+    Nenhuma tarefa cadastrada.
+  </mat-card-content>   
+</mat-card>
+
 <mat-card class="card-tarefa" [ngClass]="tarefa.severidade" *ngFor="let tarefa of tarefas">
   <mat-card-title>
     <span>{{ tarefa.descricao }}</span>
