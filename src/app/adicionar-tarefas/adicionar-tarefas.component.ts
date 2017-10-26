@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
 
+import {MatSnackBar} from '@angular/material';
+
 import { TarefaService } from '../tarefa/tarefa.service';
 import { DialogsService } from '../custom-dialog/custom-dialog.service';
 import { PushNotificationsService } from 'angular2-notifications';
@@ -26,15 +28,20 @@ export class AdicionarTarefasComponent implements OnInit {
 
   constructor(private tarefaService: TarefaService,
               private dialogsService: DialogsService,
-              private _push: PushNotificationsService) { }
+              private _push: PushNotificationsService,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.consultar();
     this._push.requestPermission();
   }
 
-  criarPushNotification(title, body){
-    this._push.create(title, {body: body}).subscribe(
+  criarPushNotification(title, body, icone){
+    let notificacao = this._push.create(title, 
+    {
+      body: body,
+      icon: icone,
+    }).subscribe(
       res => console.log(res),
       err => console.log(err)
     );
@@ -68,9 +75,9 @@ export class AdicionarTarefasComponent implements OnInit {
   verificarDatas(){  
     this.tarefas.forEach(tarefa => {
       if (this.comparaDatas(tarefa.deadline) == "hoje"){
-        this.criarPushNotification(tarefa.descricao, "Termina hoje!");
+        this.criarPushNotification(tarefa.descricao, "Termina hoje!", "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/alert-triangle-yellow-512.png");
       } else if (this.comparaDatas(tarefa.deadline) == "atraso"){
-        this.criarPushNotification(tarefa.descricao, "ATRASADA!");
+        this.criarPushNotification(tarefa.descricao, "ATRASADA!", "https://cdn3.iconfinder.com/data/icons/picons-weather/57/53_warning-512.png");
       } else {
         console.log(tarefa.descricao + "DATA: " + new Date(tarefa.deadline));
       }
@@ -106,12 +113,13 @@ export class AdicionarTarefasComponent implements OnInit {
     })
   }
 
-  deleteDialog(title, message, _id) {
+  deleteDialog(title, message, tarefa) {
     this.dialogsService
       .confirm(title, message)
       .subscribe(result => {
         if (result){
-          this.remover(_id);
+          this.remover(tarefa.id);
+          this.abrirSnackBar("Tarefa " + tarefa.descricao + " deletada.");
         }
       });
   }
@@ -123,7 +131,14 @@ export class AdicionarTarefasComponent implements OnInit {
       if (result){
         tarefa.realizada = 1;
         this.atualizar(tarefa.id, tarefa);
+        this.abrirSnackBar("Tarefa " + tarefa.descricao + " finalizada.");        
       }
+    });
+  }
+
+  abrirSnackBar(mensagem: string){
+    this.snackBar.open(mensagem, "OK", {
+      duration: 2000,
     });
   }
 }
